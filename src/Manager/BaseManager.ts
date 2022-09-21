@@ -45,7 +45,8 @@ export abstract class BaseManager {
         uri: track.uri,
         title: track.name,
         author: track.artist,
-        duration: track.duration
+        duration: track.duration,
+        thumbnail: track.thumbnail,
       }
     }
 }

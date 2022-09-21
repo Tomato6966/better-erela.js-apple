@@ -4,7 +4,7 @@ import { AppleMusic } from './plugin'
 import { AppleMusicMetaTagResponse } from './types'
 
 import {
-  MusicVideoManager, PlaylistManager, AlbumManager, ArtistManager
+  MusicVideoManager, PlaylistManager, AlbumManager, ArtistManager, SearchManager
 } from './Manager/index'
 
 export class resolver {
@@ -16,7 +16,8 @@ export class resolver {
     'music-video': new MusicVideoManager(this),
     playlist: new PlaylistManager(this),
     album: new AlbumManager(this),
-    artist: new ArtistManager(this)
+    artist: new ArtistManager(this),
+    search: new SearchManager(this),
   };
 
   public async fetchAccessToken () {

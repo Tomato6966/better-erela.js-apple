@@ -24,16 +24,16 @@ export class MusicVideoManager extends BaseManager {
       if (this.resolver.plugin.options.cacheTrack) {
         this.cache.set(id, {
           tracks: [{
-            name: fileredData.attributes.name, uri: fileredData.attributes.url, artist: fileredData.attributes.artistName, duration: fileredData.attributes.durationInMillis
+            name: fileredData.attributes.name, uri: fileredData.attributes.url, artist: fileredData.attributes.artistName, duration: fileredData.attributes.durationInMillis, thumbnail: fileredData.attributes.artwork?.url
           }]
         })
       }
       return this.buildSearch('TRACK_LOADED', this.resolver.plugin.options.convertUnresolved
         ? await this.autoResolveTrack([TrackUtils.buildUnresolved(this.buildUnresolved({
-          name: fileredData.attributes.name, uri: fileredData.attributes.url, artist: fileredData.attributes.artistName, duration: fileredData.attributes.durationInMillis
+          name: fileredData.attributes.name, uri: fileredData.attributes.url, artist: fileredData.attributes.artistName, duration: fileredData.attributes.durationInMillis, thumbnail: fileredData.attributes.artwork?.url
         }), requester)])
         : [TrackUtils.buildUnresolved(this.buildUnresolved({
-            name: fileredData.attributes.name, uri: fileredData.attributes.url, artist: fileredData.attributes.artistName, duration: fileredData.attributes.durationInMillis
+            name: fileredData.attributes.name, uri: fileredData.attributes.url, artist: fileredData.attributes.artistName, duration: fileredData.attributes.durationInMillis, thumbnail: fileredData.attributes.artwork?.url
           }), requester)], undefined, undefined)
     } catch (e) {
       return this.buildSearch('NO_MATCHES', undefined, 'Could not find any suitable track(s), unexpected apple music response', undefined)

@@ -5,8 +5,13 @@ import { AppleMusicOptions } from './types'
 import { resolver } from './resolver'
 
 export class AppleMusic extends Plugin {
-  public constructor (public options: AppleMusicOptions = { cacheTrack: true, maxCacheLifeTime: 360000 }) {
+  public constructor (public options: AppleMusicOptions = { 
+    cacheTrack: true, 
+    maxCacheLifeTime: 360000,
+  
+  }) {
     super()
+    this.querySource = options.querySource && Array.isArray(options.querySource) ? options.querySource :  ["am", "applemusic", "musicapple", "music apple"];
   }
 
   public readonly resolver = new resolver(this);
@@ -21,7 +26,6 @@ export class AppleMusic extends Plugin {
     this.manager = manager
     this._search = manager.search.bind(manager)
     manager.search = this.search.bind(this)
-
     await this.resolver.fetchAccessToken()
   }
 
@@ -30,6 +34,10 @@ export class AppleMusic extends Plugin {
     const [, type, , , id] = this.appleMusicMatch.exec(finalQuery) ?? []
     if (type in this.resolver.resolveManager) {
       return this.resolver.resolveManager[type as keyof resolver['resolveManager']].fetch(id, requester)
+    } 
+    const source = query?.source;
+    if (this.querySource.includes(source.toLowerCase())) {
+      this.resolver.resolveManager.search(query?.query ?? query, requester);
     }
     return this._search(query, requester)
   }
