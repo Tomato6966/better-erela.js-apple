@@ -2,7 +2,7 @@ import { SearchResult, TrackUtils } from 'erela.js'
 import { fetch } from 'undici'
 import { BaseManager } from './BaseManager'
 
-export class MusicVideoManager extends BaseManager {
+export class SearchManager extends BaseManager {
   public async fetch (query: string, requester: unknown): Promise<SearchResult> {
     try {
       if (!this.resolver.token) await this.resolver.fetchAccessToken()

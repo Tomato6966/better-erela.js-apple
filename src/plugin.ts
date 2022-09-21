@@ -8,7 +8,6 @@ export class AppleMusic extends Plugin {
   public constructor (public options: AppleMusicOptions = { 
     cacheTrack: true, 
     maxCacheLifeTime: 360000,
-  
   }) {
     super()
     this.querySource = options.querySource && Array.isArray(options.querySource) ? options.querySource :  ["am", "applemusic", "musicapple", "music apple"];
@@ -37,7 +36,7 @@ export class AppleMusic extends Plugin {
     } 
     const source = query?.source;
     if (this.querySource.includes(source.toLowerCase())) {
-      this.resolver.resolveManager.search(query?.query ?? query, requester);
+      this.resolver.resolveManager.search(query?.query! ?? query, requester);
     }
     return this._search(query, requester)
   }
